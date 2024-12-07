@@ -13,7 +13,7 @@ const { Server } = require("socket.io");
 
 const io = new Server(3030, {
   cors: {
-    origin: ["http://localhost:3000"],
+    origin: ["http://www.bussijuht.com"],
   },
 });
 
