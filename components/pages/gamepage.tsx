@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
 import { Typography, IconButton, Button } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { io } from 'socket.io-client';
+import { io } from "socket.io-client";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -19,7 +19,7 @@ const socket = io("http://localhost:3030");
 // useEffect(() => {
 //    socket.on("connect", () => {
 //      console.log("Connected to socket server, socket ID:", socket.id);
-     
+
 //      setSocketId(socket.id as string);
 //    });
 
@@ -40,39 +40,25 @@ const socket = io("http://localhost:3030");
 //lõpp
 
 // display all players dices
-socket.on("display-all-dices", (dice) => {
-  
-});
+socket.on("display-all-dices", (dice) => {});
 
 // hide all dices
-socket.on("hide-all-dices", () => {
-  
-});
+socket.on("hide-all-dices", () => {});
 
 // display this player dices
-socket.on("display-player-dices", (userId) => {
-  
-});
+socket.on("display-player-dices", (userId) => {});
 
 // display all hearts (minus need mis on maha lainud)
-socket.on("display-hearts", (lives) => {
-  
-});
+socket.on("display-hearts", (lives) => {});
 
 // display hetkest turni
-socket.on("display-turn", (turns) => {
-  
-});
+socket.on("display-turn", (turns) => {});
 
 // display hetkest turni
-socket.on("display-current-bid", (activeBid) => {
-  
-});
+socket.on("display-current-bid", (activeBid) => {});
 
 // display current action
-socket.on("display-action", (action) => {
-  
-});
+socket.on("display-action", (action) => {});
 
 //Täringute asetamine ekraanil
 const dicePositions = [
@@ -114,14 +100,12 @@ const GamePage: React.FC = () => {
   const [diceValue, setDiceValue] = useState(1); // Dice face 1-6
   const [isTurn, setIsTurn] = useState(false);
 
-//   const [players, setPlayers] = useState([
-//     { id: 1, name: "Player 1", bgImage: "url('/image/smile/smile.jpg')", position: "bottom" },
-//     { id: 2, name: "Player 2", bgImage: "url('/image/smile/smile2.jpg')", position: "right" },
-//     { id: 3, name: "Player 3", bgImage: "url('/image/smile/smile5.jpg')", position: "top" },
-//     { id: 4, name: "Player 4", bgImage: "url('/image/smile/smile6.jpg')", position: "left" },
-//   ]);
-
-
+  //   const [players, setPlayers] = useState([
+  //     { id: 1, name: "Player 1", bgImage: "url('/image/smile/smile.jpg')", position: "bottom" },
+  //     { id: 2, name: "Player 2", bgImage: "url('/image/smile/smile2.jpg')", position: "right" },
+  //     { id: 3, name: "Player 3", bgImage: "url('/image/smile/smile5.jpg')", position: "top" },
+  //     { id: 4, name: "Player 4", bgImage: "url('/image/smile/smile6.jpg')", position: "left" },
+  //   ]);
 
   // Hoia täringute pildid seisundis
   const [randomDiceImages, setRandomDiceImages] = useState<string[]>([]);
@@ -252,7 +236,7 @@ const GamePage: React.FC = () => {
       )
     );
   };
-//vb roomCode on stringina mdea prg
+  //vb roomCode on stringina mdea prg
 
   const handleStartGame = (roomCode: number) => {
     const playersWithoutPosition = players.filter((player) => !player.position);
@@ -295,28 +279,31 @@ const GamePage: React.FC = () => {
     router.push("/");
   };
 
-  const handlePlaceBid = async (roomCode: number, diceAmount: number, diceValue: number) => {
-   if (isTurn){
+  const handlePlaceBid = async (
+    roomCode: number,
+    diceAmount: number,
+    diceValue: number
+  ) => {
+    if (isTurn) {
       try {
-         console.log("Placing bid...");
-         console.log(`Dice Amount: ${diceAmount}, Dice Value: ${diceValue}`);
-         socket.emit("placed-bid", { roomCode, diceAmount, diceValue });
-     } catch (error) {
-         console.error("Error placing bid:", error);
-     }
-   }
-};
-const handleBidCheck = async (response: boolean, roomCode: number) => {
-   if (isTurn){
+        console.log("Placing bid...");
+        console.log(`Dice Amount: ${diceAmount}, Dice Value: ${diceValue}`);
+        socket.emit("placed-bid", { roomCode, diceAmount, diceValue });
+      } catch (error) {
+        console.error("Error placing bid:", error);
+      }
+    }
+  };
+  const handleBidCheck = async (response: boolean, roomCode: number) => {
+    if (isTurn) {
       try {
-         console.log("Challenging bid...");
-         socket.emit("check-bid", { response, roomCode });
-     } catch (error) {
-         console.error("Error placing bid:", error);
-     }
-   }
-};
-
+        console.log("Challenging bid...");
+        socket.emit("check-bid", { response, roomCode });
+      } catch (error) {
+        console.error("Error placing bid:", error);
+      }
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-screen bg-gray-800 relative">
@@ -380,18 +367,18 @@ const handleBidCheck = async (response: boolean, roomCode: number) => {
               <Button
                 variant="contained"
                 color="success"
-                onClick={handleStartGame}
+                onClick={() => handleStartGame(roomCode)} // Pass `roomCode` via a closure
                 sx={{
-                  padding: "1rem 2rem",
-                  fontSize: "1.25rem",
+                  padding: "10px",
+                  fontSize: "16px",
                   fontWeight: "bold",
                   backgroundColor: "#4CAF50",
                   "&:hover": {
-                    backgroundColor: "#45A049",
+                    backgroundColor: "#45a049",
                   },
                 }}
               >
-                START GAME
+                Start Game
               </Button>
             )}
 
